@@ -1,7 +1,7 @@
-package com.example.cryptomarketplace2.infrastructure.di
+package com.cryptomarketplace.infrastructure.di
 
-import com.example.cryptomarketplace2.domain.repository.CryptoMarketPlaceRepository
-import com.example.cryptomarketplace2.infrastructure.repository.CryptoMarketPlaceImpl
+import com.cryptomarketplace.domain.repository.CryptoMarketPlaceRepository
+import com.cryptomarketplace.infrastructure.repository.CryptoMarketPlaceRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,6 +16,6 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindCryptoMarketPlaceRepository(
-        cryptoMarketPlaceImpl: CryptoMarketPlaceImpl,
+        cryptoMarketPlaceRepositoryImpl: CryptoMarketPlaceRepositoryImpl,
     ): CryptoMarketPlaceRepository
 }

@@ -1,8 +1,7 @@
-package com.example.cryptomarketplace.ui.theme
+package com.cryptomarketplace.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFF2196F3)
-val Purple500 = Color(0xFF2196F3)
-val Purple700 = Color(0xFF2196F3)
-val Teal200 = Color(0xFF2196F3)
+val statusBarColor = Color(0xFF0288D1)
+val appBarColor = Color(0xFF03A9F4)
+val x = Color(0xFFB3E5FC)

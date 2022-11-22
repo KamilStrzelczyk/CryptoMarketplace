@@ -1,4 +1,4 @@
-package com.example.cryptomarketplace2.infrastructure.api
+package com.cryptomarketplace.infrastructure.api
 
 
 import retrofit2.http.GET

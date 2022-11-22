@@ -1,12 +1,13 @@
-package com.example.cryptomarketplace2.presentation
+package com.cryptomarketplace.presentation
 
 import androidx.compose.runtime.mutableStateOf
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptomarketplace.presentation.Utils
-import com.example.cryptomarketplace2.domain.usecase.GetDataUseCase
-import com.example.cryptomarketplace2.infrastructure.entity.TickerDto
+import com.cryptomarketplace.domain.coin.CoinType
+import com.cryptomarketplace.domain.entity.TickerData
+import com.cryptomarketplace.domain.usecase.GetDataUseCase
+import com.cryptomarketplace.infrastructure.entity.TickerDto
 import com.example.cryptomarketplace2.presentation.entity.TokenUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,14 +18,15 @@ class CryptoMarketPlaceViewModel @Inject constructor(
     private val getDataUseCase: GetDataUseCase,
 ) : ViewModel() {
     val state = mutableStateOf(ViewModelState())
-    var coinList: List<TickerDto> = emptyList()
+    var coinList: List<TickerData> = emptyList()
 
     init {
         viewModelScope.launch {
             updateState(state.value.copy(
                 isLoading = true,
             ))
-            getDataUseCase(Utils.REQUEST).collect { result ->
+            val coinTypeRequest = CoinType.values().joinToString(separator = ",") { it.usdToCoinShortcut }
+            getDataUseCase(coinTypeRequest).collect { result ->
                 coinList = result
                 updateState(state.value.copy(
                     dataFromTickers = coinList.mapToUiModel(),
@@ -33,7 +35,6 @@ class CryptoMarketPlaceViewModel @Inject constructor(
             }
         }
     }
-
 
     fun onCloseClicked() {
         if (state.value.searchText.isNotBlank()) {
@@ -52,7 +53,7 @@ class CryptoMarketPlaceViewModel @Inject constructor(
     }
 
     fun onTextSearchChange(searchText: String) {
-        val searchedResult = coinList.filter { it.symbol.contains(searchText) }
+        val searchedResult = coinList.filter { it.coinType.coinNameShortcut.contains(searchText) }
         updateState(state.value.copy(
             searchText = searchText,
             dataFromTickers = searchedResult.mapToUiModel()
@@ -63,11 +64,12 @@ class CryptoMarketPlaceViewModel @Inject constructor(
         this.state.value = state
     }
 
-    private fun List<TickerDto>.mapToUiModel() = map {
+    private fun List<TickerData>.mapToUiModel() = map {
         TokenUiModel(
-            symbol = it.symbol,
+            symbol = it.coinType.coinNameShortcut,
             lastPrice = it.lastPrice,
             dailyChangeRelative = it.dailyChangeRelative,
+            logoIcon = it.coinType.iconRes,
             isUp = it.dailyChangeRelative >= 0.0)
     }
 

@@ -1,7 +1,7 @@
-package com.example.cryptomarketplace2.infrastructure.di
+package com.cryptomarketplace.infrastructure.di
 
 
-import com.example.cryptomarketplace2.infrastructure.api.TickersApi
+import com.cryptomarketplace.infrastructure.api.TickersApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

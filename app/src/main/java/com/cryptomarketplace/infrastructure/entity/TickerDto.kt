@@ -1,4 +1,4 @@
-package com.example.cryptomarketplace2.infrastructure.entity
+package com.cryptomarketplace.infrastructure.entity
 
 
 data class TickerDto(

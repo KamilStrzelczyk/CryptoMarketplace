@@ -1,23 +1,25 @@
-package com.example.cryptomarketplace2.infrastructure.repository
+package com.cryptomarketplace.infrastructure.repository
 
-import com.example.cryptomarketplace2.domain.repository.CryptoMarketPlaceRepository
-import com.example.cryptomarketplace2.infrastructure.api.TickersApi
-import com.example.cryptomarketplace2.infrastructure.entity.TickerDto
+import com.cryptomarketplace.domain.coin.CoinType
+import com.cryptomarketplace.domain.entity.TickerData
+import com.cryptomarketplace.domain.repository.CryptoMarketPlaceRepository
+import com.cryptomarketplace.infrastructure.api.TickersApi
+import com.cryptomarketplace.infrastructure.entity.TickerDto
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class CryptoMarketPlaceImpl @Inject constructor(
+class CryptoMarketPlaceRepositoryImpl @Inject constructor(
     private val api: TickersApi,
 ) : CryptoMarketPlaceRepository {
 
-    override suspend fun getTickersDetailData(symbols: String): Flow<List<TickerDto>> = flow {
+    override suspend fun getTickersDetailData(symbols: String): Flow<List<TickerData>> = flow {
         while (true){
             val result: List<TickerDto> = api.getTickersData(symbols).map {
                 parseToTicker(it)
             }
-            emit(result)
+            emit(result.mapToTickerData())
             delay(5000)
         }
     }
@@ -38,3 +40,12 @@ class CryptoMarketPlaceImpl @Inject constructor(
         )
     }
 }
+
+private fun List<TickerDto>.mapToTickerData() = map {
+    TickerData(
+        lastPrice = it.lastPrice,
+        dailyChangeRelative = it.dailyChangeRelative,
+        coinType = CoinType.getCoinTypeByUSDtoCoinShortcut(it.symbol)
+    )
+}
+

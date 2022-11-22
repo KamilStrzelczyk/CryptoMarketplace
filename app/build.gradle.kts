@@ -71,4 +71,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     implementation("androidx.navigation:navigation-compose:2.5.3")
 
+    // status bar customization
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
+
+
 }

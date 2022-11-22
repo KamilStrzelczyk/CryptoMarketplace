@@ -23,8 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.cryptomarketplace2.infrastructure.entity.TickerDto
-import com.example.cryptomarketplace2.presentation.CryptoMarketPlaceViewModel
+import com.cryptomarketplace.infrastructure.entity.TickerDto
 
 @Composable
 
@@ -57,18 +56,17 @@ fun CryptoMarketPlaceScreen(
                 .padding(padding)
                 .fillMaxSize()
         ) {
-            val coins = state.dataFromTickers
-            var filteredCoins: List<TickerDto>
 
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                items(coins) {
+                items(state.dataFromTickers) {
                     CoinDetailBox(
                         nameCoin = it.symbol,
                         lastPrice = "$ ${it.lastPrice}",
                         dailyChangeRelative = it.dailyChangeRelative.toString(),
+                        logoIcon = it.logoIcon,
                         isUp = it.isUp,
                     )
                 }
@@ -82,46 +80,53 @@ fun CryptoMarketPlaceScreen(
     SearchTopAppBar(viewModel = viewModel)
 }
 
-
 @Composable
 
 fun CoinDetailBox(
     nameCoin: String,
     lastPrice: String,
     dailyChangeRelative: String,
+    logoIcon: Int,
     isUp: Boolean,
 ) {
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(5.dp)
-    ) {
+            .padding(horizontal = 8.dp, vertical = 8.dp),
+
+        ) {
 
         Card(elevation = 10.dp) {
 
             Row(
                 modifier = Modifier
-                    .padding(5.dp)
+                    .padding(24.dp)
+                    .height(56.dp)
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(30.dp)),
+                    ,
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
 
-            ) {
+                ) {
+                Icon(modifier = Modifier
+                    .size(40.dp),
+                    painter = painterResource(id = logoIcon),
+                    contentDescription = null,
+                    tint = Color.Unspecified
+                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
                 Text(
                     text = nameCoin,
                     fontWeight = FontWeight.Bold
                 )
-                Icon(
-                    painter = painterResource(id = R.drawable.cryptocurrency),
-                    contentDescription = null,
-                    tint = Color.Unspecified
-                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
                 Column(
-                    horizontalAlignment = Alignment.End,
-                    modifier = Modifier
-                        .padding(5.dp),
+
                 ) {
                     Text(
                         text = lastPrice,
