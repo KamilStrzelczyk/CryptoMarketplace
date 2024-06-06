@@ -1,4 +1,4 @@
-package com.cryptomarketplace.domain.coin
+package com.cryptomarketplace.domain.model
 
 import com.example.cryptomarketplace.R
 
@@ -116,8 +116,7 @@ enum class CoinType(
     );
 
     companion object {
-        fun getCoinTypeByUSDtoCoinShortcut(usdToCoinShortcut : String): CoinType =
-            CoinType.values().first{ it.usdToCoinShortcut == usdToCoinShortcut }
-
+        fun getCoinTypeByUSDtoCoinShortcut(usdToCoinShortcut: String): CoinType =
+            entries.first { it.usdToCoinShortcut == usdToCoinShortcut }
     }
 }

@@ -1,6 +1,6 @@
 package com.cryptomarketplace.infrastructure.repository
 
-import com.cryptomarketplace.domain.coin.CoinType
+import com.cryptomarketplace.domain.model.CoinType
 import com.cryptomarketplace.domain.entity.TickerData
 import com.cryptomarketplace.domain.repository.CryptoMarketPlaceRepository
 import com.cryptomarketplace.infrastructure.api.TickersApi

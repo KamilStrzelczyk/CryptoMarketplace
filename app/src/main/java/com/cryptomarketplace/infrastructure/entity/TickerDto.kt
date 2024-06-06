@@ -1,6 +1,5 @@
 package com.cryptomarketplace.infrastructure.entity
 
-
 data class TickerDto(
     val symbol: String,
     val bid: Double,

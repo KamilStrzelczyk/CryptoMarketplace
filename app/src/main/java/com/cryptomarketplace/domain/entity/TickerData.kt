@@ -1,6 +1,6 @@
 package com.cryptomarketplace.domain.entity
 
-import com.cryptomarketplace.domain.coin.CoinType
+import com.cryptomarketplace.domain.model.CoinType
 
 data class TickerData(
     val dailyChangeRelative: Double,
