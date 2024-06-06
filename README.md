@@ -6,4 +6,4 @@
 - Room
 - Retrofit
 
-<img src="[https://github.com/favicon.ico](https://github.com/KamilStrzelczyk/CryptoMarketplace/assets/73589639/44a260f9-3b59-459f-b404-db034559beb6)" width="250">
+![Screenshot_1717698999](https://github.com/KamilStrzelczyk/CryptoMarketplace/assets/73589639/3ee8af3d-5277-4b4e-b119-4b582c2bef83=400x250)
