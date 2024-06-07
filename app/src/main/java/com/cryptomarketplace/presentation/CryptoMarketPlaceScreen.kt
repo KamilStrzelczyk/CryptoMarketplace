@@ -67,7 +67,7 @@ fun CryptoMarketPlaceScreen(
         }
     }
     SearchTopAppBar(
-        showSearchAppBar = false,
+        showSearchAppBar = state.showSearchAppBar,
         searchText = state.searchText,
         onCloseClicked = { viewModel.onCloseClicked() },
         onTextSearchChange = { viewModel.onTextSearchChange(it) }
